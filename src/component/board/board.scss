@@ -1,0 +1,33 @@
+
+.board{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .xoxo{
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+  .twoplayer{
+    background-color: whitesmoke;
+    padding: 8px;
+    display: flex;
+    gap: 10px;
+
+  }
+  .board-row{
+    display: flex;
+    gap: 5px;
+  }
+  .option{
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+}
