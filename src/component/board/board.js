@@ -55,19 +55,16 @@ function Board() {
             return board[a]==="X"? 2:-2;
         }
     }
-
     if (board.every((element) => element)) {
         return 0
     } 
-
     setWinner(null)
     return 1;
 }
    function handleClick(i) {
     console.log("way ",wayPlay)
     console.log("11111")
-        if (squares[i]
-             ){
+        if (squares[i] || checkwinner(squares)){
             return;
         }
         const nextSquares = squares.slice();
@@ -82,7 +79,6 @@ function Board() {
             nextSquares[i] = "O";
             }
         }
-
         setSquares(nextSquares);
         setXIsNext(!xIsNext);
     }
@@ -142,25 +138,29 @@ function Board() {
         }
     }
 
-
-
   return (
     <div className="board">
-        <h2> TIC TAC TOE </h2>
+        <h2 className='aa'> TIC TAC TOE </h2>
         <div className="twoplayer">
-            <button onClick={async()=>{
-                await setWayPlay(1)
-                setNull()
 
-            }}> TWO PLAYER </button>
-            <button onClick={async()=>{
+            <button className={`bb1 ${wayPlay===0? "acac":""}`} onClick={async()=>{
                 await setWayPlay(0)
                 setNull()
             }}> ONE PLAYER </button>
+             <button className={`bb1 ${wayPlay===1? "acac":""}`}  onClick={async()=>{
+                await setWayPlay(1)
+                setNull()
+            }}> TWO PLAYER </button>
+        </div>
+        <div className="selectLevel">
+            <select name="" id="">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium    </option>
+                <option value="hard">Hard</option>
+            </select>
         </div>
 
         <div className="xoxo">
-
             <div className="board-row">
                 <Square value={squares[0]} onSquareClick={()=>{handleClick(0)}} />
                 <Square value={squares[1]} onSquareClick={()=>{handleClick(1)}}/>
@@ -176,15 +176,13 @@ function Board() {
                 <Square value={squares[7]} onSquareClick={()=>{handleClick(7)}}/>
                 <Square value={squares[8]} onSquareClick={()=>{handleClick(8)}}/>
             </div>
-
         </div>
         <div className="option">
-            <h2 className="status">   { winner===-2 || winner===2  ? `Winner is : ${winner===-2? "O" :"X"} `: " "}</h2>
-            <button onClick={()=>{
+            <button className='bb12' onClick={()=>{
                 setSquares(Array(9).fill(null))
             }}> Play Again </button>
+            <h2 className="status">   { winner===-2 || winner===2  ? `Winner is : ${winner===-2? "O" :"X"} `: " "}</h2>
         </div>
-
     </div>
   );
 }
