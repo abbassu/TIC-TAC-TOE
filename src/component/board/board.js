@@ -8,7 +8,7 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [wayPlay, setWayPlay] = useState(1);
-  const [levelPlay, setLevelPlay] = useState(0);
+  const [levelPlay, setLevelPlay] = useState(8);
   const [angle,setangle]=useState("")
 
 
@@ -170,10 +170,10 @@ function Board() {
         </div>
         <div className={`selectLevel  ${wayPlay===1? "ff":""}`} onChange={selectHandle}>
             <select name="" id="">
-            <option value="hard">Hard</option>
 
+            <option value="hard">Hard</option>
             <option value="medium">Medium    </option>
-                <option value="easy">Easy</option>
+            <option value="easy">Easy</option>
   
             </select>
         </div>
