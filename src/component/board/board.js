@@ -8,7 +8,7 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [wayPlay, setWayPlay] = useState(1);
-  const [levelPlay, setLevelPlay] = useState(8);
+  const [levelPlay, setLevelPlay] = useState(0);
   const [angle,setangle]=useState("")
 
 
