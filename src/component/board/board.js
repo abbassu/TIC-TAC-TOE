@@ -203,6 +203,11 @@ function Board() {
             }}> Play Again </button>
             <h2 className="status">   { winner===-2 || winner===2  ? `Winner is : ${winner===-2? "O" :"X"} `: `${winner===0? "Ohh Tie" :""}`}</h2>
         </div>
+
+
+        <div className="names">
+            Abbas & Obaida
+        </div>
     </div>
   );
 }
