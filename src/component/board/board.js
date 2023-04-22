@@ -8,10 +8,16 @@ function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [wayPlay, setWayPlay] = useState(1);
+  const [levelPlay, setLevelPlay] = useState(8);
+  const [angle,setangle]=useState("")
+
+
 
   const [winner,setWinner]=useState("")
   async function setNull(){
    await setSquares(Array(9).fill(null))
+   setangle(9)
+   
   }
   function checkwinner(board){
     const lines = [
@@ -28,11 +34,15 @@ function Board() {
         const [a, b, c] = lines[i];
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
             console.log("wineer",board[a])
-
+            setangle(i)
             setWinner(board[a]==="X"? 2:-2)
             return board[a]==="X"? 2:-2
         }
     }
+    if (board.every((element) => element)) {
+        setWinner(0)
+        return 0
+    } 
 
     setWinner(null)
     return null;
@@ -70,7 +80,7 @@ function Board() {
         const nextSquares = squares.slice();
         nextSquares[i] = "X";
         if(wayPlay===0){
-            minimax(nextSquares,8,false,true)
+            minimax(nextSquares,levelPlay,false,true)
         }
         else{
             if (xIsNext) {
@@ -137,6 +147,12 @@ function Board() {
             return finalScore;
         }
     }
+    function selectHandle(event){
+        console.log("event ",event.target.value)
+        if(event.target.value==="easy")setLevelPlay(1)
+        else if (event.target.value==="medium")setLevelPlay(4)
+        else if (event.target.value)setLevelPlay(8)
+    }
 
   return (
     <div className="board">
@@ -152,15 +168,18 @@ function Board() {
                 setNull()
             }}> TWO PLAYER </button>
         </div>
-        <div className="selectLevel">
+        <div className={`selectLevel  ${wayPlay===1? "ff":""}`} onChange={selectHandle}>
             <select name="" id="">
+            <option value="hard">Hard</option>
+
+            <option value="medium">Medium    </option>
                 <option value="easy">Easy</option>
-                <option value="medium">Medium    </option>
-                <option value="hard">Hard</option>
+  
             </select>
         </div>
 
         <div className="xoxo">
+            <div className={`bar dd-${angle}`}></div>
             <div className="board-row">
                 <Square value={squares[0]} onSquareClick={()=>{handleClick(0)}} />
                 <Square value={squares[1]} onSquareClick={()=>{handleClick(1)}}/>
@@ -177,11 +196,12 @@ function Board() {
                 <Square value={squares[8]} onSquareClick={()=>{handleClick(8)}}/>
             </div>
         </div>
-        <div className="option">
+        <div className="optiion">
             <button className='bb12' onClick={()=>{
                 setSquares(Array(9).fill(null))
+                setangle("")
             }}> Play Again </button>
-            <h2 className="status">   { winner===-2 || winner===2  ? `Winner is : ${winner===-2? "O" :"X"} `: " "}</h2>
+            <h2 className="status">   { winner===-2 || winner===2  ? `Winner is : ${winner===-2? "O" :"X"} `: `${winner===0? "Ohh Tie" :""}`}</h2>
         </div>
     </div>
   );
