@@ -212,7 +212,7 @@ function Board() {
     function selectHandle(event){
         console.log("event ",event.target.value)
         if(event.target.value==="easy")setLevelPlay(1)
-        else if (event.target.value==="medium")setLevelPlay(5)
+        else if (event.target.value==="medium")setLevelPlay(6)
         else if (event.target.value)setLevelPlay(8)
     }
 
