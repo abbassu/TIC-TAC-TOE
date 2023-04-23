@@ -80,7 +80,7 @@ function Board() {
         const nextSquares = squares.slice();
         nextSquares[i] = "X";
         if(wayPlay===0){
-            minimax(nextSquares,levelPlay,false,true)
+            minimax_alpha_beta(nextSquares,levelPlay,false,true,-11111111,11111111)
         }
         else{
             if (xIsNext) {
@@ -98,27 +98,81 @@ function Board() {
         checkwinner(squares)
     },[squares])
 
-    function minimax(board, depth, isMaximizing, firstTime) {
+    // function minimax(board, depth, isMaximizing, firstTime) {
+    //     const result = calculateWinner(board);
+    //     if (depth === 0 || result!==1 ) {
+    //         return result;
+    //     }
+    //     if (isMaximizing) {
+    //         let finalScore = -10;
+    //         let finalI = -1;
+    //         for (let i = 0; i < 9; i++) {
+    //                 if (board[i] === null) {
+    //                     board[i] = 'X';
+    //                     const score = minimax(board, depth - 1, false, false);
+    //                     board[i] = null;
+    //                     if (score > finalScore) {
+    //                         finalScore = score;
+    //                         finalI = i;
+    //                     }
+    //                     if (firstTime) {
+    //                         setSquares(board)
+    //                     }
+    //                 }
+    //         }
+    //         if (firstTime) {
+    //             board[finalI] = 'O';
+    //         }
+    //         return finalScore;
+    //     } else {
+    //         let finalScore = 10;
+    //         let finalI = -1;
+    //         for (let i = 0; i < 9; i++) {
+    //                 if (board[i] === null) {
+    //                     board[i] = 'O';
+    //                     const score = minimax(board, depth - 1, true, false);
+    //                     board[i] = null;
+    //                     if (score < finalScore) {
+    //                         finalScore = score;
+    //                         finalI = i;
+    //                     }
+    //                     if (firstTime) {
+    //                         setSquares(board)
+    //                     }
+    //                 }
+    //         }
+    //         if (firstTime) {
+    //             board[finalI] = 'O';
+    //         }
+    //         return finalScore;
+    //     }
+    // }
+
+    function minimax_alpha_beta(board, depth, isMaximizing, firstTime, alpha, beta) {
         const result = calculateWinner(board);
-        if (depth === 0 || result!==1 ) {
+        if (depth === 0 || result !== 1) {
             return result;
         }
         if (isMaximizing) {
             let finalScore = -10;
             let finalI = -1;
             for (let i = 0; i < 9; i++) {
-                    if (board[i] === null) {
-                        board[i] = 'X';
-                        const score = minimax(board, depth - 1, false, false);
-                        board[i] = null;
-                        if (score > finalScore) {
-                            finalScore = score;
-                            finalI = i;
-                        }
-                        if (firstTime) {
-                            setSquares(board)
-                        }
+                if (board[i] === null) {
+                    board[i] = 'X';
+                    const score = minimax_alpha_beta(board, depth - 1, false, false, alpha, beta);
+                    board[i] = null;
+                    if (score > finalScore) {
+                        finalScore = score;
+                        finalI = i;
                     }
+                    alpha = Math.max(alpha, finalScore);
+                    if (alpha >= beta) {
+                        break;  // Alpha pruning
+                    }
+                    if (firstTime) {
+                        setSquares(board);
+                    }
+                }
             }
             if (firstTime) {
                 board[finalI] = 'O';
@@ -128,18 +182,22 @@ function Board() {
             let finalScore = 10;
             let finalI = -1;
             for (let i = 0; i < 9; i++) {
-                    if (board[i] === null) {
-                        board[i] = 'O';
-                        const score = minimax(board, depth - 1, true, false);
-                        board[i] = null;
-                        if (score < finalScore) {
-                            finalScore = score;
-                            finalI = i;
-                        }
-                        if (firstTime) {
-                            setSquares(board)
-                        }
+                if (board[i] === null) {
+                    board[i] = 'O';
+                    const score = minimax_alpha_beta(board, depth - 1, true, false, alpha, beta);
+                    board[i] = null;
+                    if (score < finalScore) {
+                        finalScore = score;
+                        finalI = i;
                     }
+                    beta = Math.min(beta, finalScore);
+                    if (beta <= alpha) {
+                        break;  // Beta pruning
+                    }
+                    if (firstTime) {
+                        setSquares(board);
+                    }
+                }
             }
             if (firstTime) {
                 board[finalI] = 'O';
@@ -147,6 +205,10 @@ function Board() {
             return finalScore;
         }
     }
+    
+
+
+
     function selectHandle(event){
         console.log("event ",event.target.value)
         if(event.target.value==="easy")setLevelPlay(1)
