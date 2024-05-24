@@ -1,5 +1,8 @@
 # Tic Tac Toe Game 🎮
 
+
+![React](https://img.shields.io/badge/react-16.13.1-blue.svg)
+
 Welcome to the Tic Tac Toe game, developed as part of an AI course project at the university. This application is built using React and demonstrates basic game logic and AI implementation.
 
 ![Tic Tac Toe Game](public/t3.png)
