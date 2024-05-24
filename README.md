@@ -2,9 +2,10 @@
 
 Welcome to the Tic Tac Toe game, developed as part of an AI course project at the university. This application is built using React and demonstrates basic game logic and AI implementation.
 
-![Tic Tac Toe Game](https://via.placeholder.com/800x400.png?text=Tic+Tac+Toe+Game+Screenshot)
-![Tic Tac Toe Game](https://via.placeholder.com/800x400.png?text=Tic+Tac+Toe+Game+Screenshot)
-![Tic Tac Toe Game](https://via.placeholder.com/800x400.png?text=Tic+Tac+Toe+Game+Screenshot)
+![Tic Tac Toe Game](public/t3.png)
+![Tic Tac Toe Game](public/ti1.png)
+![Tic Tac Toe Game](public/ti2.png)
+
 
 ## 🌟 Features
 
